@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 import json
 import socket
@@ -22,7 +23,7 @@ try:
                 data = file.read()
             data = base64.b64encode(data)
 
-            command = "upd" + path_client + " " + str(len(data)) + " "
+            command = f"upd {path_client} {len(data)} "
             cl_socket.send(command.encode() + data)
             response = cl_socket.recv(1024).decode()
             print(response)
@@ -41,7 +42,7 @@ try:
             with open(path_server, "wb") as file:
                 file.write(data)
 
-            _, file = path_server.split("/")
+            file = os.path.basename(path_server)
             print(f"File {file} is downloaded")
 
         else:

@@ -20,13 +20,13 @@ while True:
             client_socket.send(f"Change directory on {list_command[1]}".encode())
 
         elif "upd" in command:
-            _, path_client, size, data = command.split(' ')
+            _, path_client, size, data = command.split(' ', 3)
             while len(data) != int(size):
                 data = data + client_socket.recv(1024).decode()
             data = base64.b64decode(data)
             with open(path_client, "wb") as file:
                 file.write(data)
-            _, file = path_client.split("/")
+            file = os.path.basename(path_client)
             client_socket.send(f"File {file} is uploaded".encode())
 
         elif "dwd" in command:
