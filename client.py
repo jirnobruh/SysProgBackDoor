@@ -8,7 +8,7 @@ from typing import List
 import base64
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect(("0.0.0.0", 5550))
+client_socket.connect(("127.0.0.1", 5550))
 print("Success connect")
 
 while True:

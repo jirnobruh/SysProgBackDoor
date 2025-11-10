@@ -5,7 +5,7 @@ import base64
 from typing import List
 
 listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-listener.bind(("0.0.0.0", 5550))
+listener.bind(("127.0.0.1", 5550))
 listener.listen(0)
 print("[+] Waiting for incoming connections")
 cl_socket, remote_address = listener.accept()
