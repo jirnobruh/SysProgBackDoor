@@ -18,7 +18,9 @@ while True:
             list_command = command.split(' ')
             os.chdir(list_command[1])
             client_socket.send(f"Change directory on {list_command[1]}".encode())
-
+        elif "ls" in command:
+            cwd = os.getcwd()
+            client_socket.send(cwd.encode())
         elif "upd" in command:
             _, path_client, size, data = command.split(' ', 3)
             while len(data) != int(size):
@@ -28,7 +30,6 @@ while True:
                 file.write(data)
             file = os.path.basename(path_client)
             client_socket.send(f"File {file} is uploaded".encode())
-
         elif "dwd" in command:
             _, path_client = command.split(' ')
             with open(path_client, 'rb') as file:
